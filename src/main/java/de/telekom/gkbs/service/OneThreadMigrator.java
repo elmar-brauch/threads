@@ -18,12 +18,12 @@ public class OneThreadMigrator {
         long start = System.currentTimeMillis();
         Iterable<ShoppingCart> carts = dataRepo.findAll();
         for (ShoppingCart cart : carts) {
-        	migrateCartPage(cart);
+        	migrateSingleCart(cart);
         }
         log.info("Migration completed in {} seconds!", ((System.currentTimeMillis() - start)/1000));
     }
     
-    private void migrateCartPage(ShoppingCart cart) {
+    private void migrateSingleCart(ShoppingCart cart) {
     	log.info("Cart with id {} is in progress...", cart.getId());
         // Doing complicated and time consuming migration logic.
     	// Simulated by save method.

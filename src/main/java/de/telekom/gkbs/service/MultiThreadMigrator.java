@@ -30,18 +30,21 @@ public class MultiThreadMigrator {
         long start = System.currentTimeMillis();
         List<CompletableFuture<Void>> threadList = new ArrayList<>();
         Pageable pageable = PageRequest.of(0, PAGE_SIZE);
-    	while(true) {
+        do {
     		log.info("Request page {}.", pageable.getPageNumber());
     		var page = dataRepo.findAll(pageable);
     		threadList.add(CompletableFuture.runAsync(() -> migrateCartPage(page), threadPool));
-    		if (page.hasNext())
-    			pageable = page.getPageable().next();
-    		else
-    			break;
-    	}
+    		pageable = getNextPageable(page);
+    	} while(pageable != null);
     	log.info("All pages passed to threads.");
     	CompletableFuture.allOf(threadList.toArray(CompletableFuture[]::new)).join();
     	log.info("All Migration threads completed in {} seconds!", ((System.currentTimeMillis() - start)/1000));
+    }
+    
+    private Pageable getNextPageable(Page<ShoppingCart> currentPage) {
+    	if (currentPage.hasNext())
+    		return currentPage.getPageable().next();
+		return null;
     }
     
     private void migrateCartPage(Page<ShoppingCart> page) {

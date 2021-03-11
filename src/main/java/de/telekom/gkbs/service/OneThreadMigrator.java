@@ -1,13 +1,13 @@
 package de.telekom.gkbs.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import de.telekom.gkbs.model.ShoppingCart;
 import de.telekom.gkbs.persistence.ShoppingCartRepository;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Component
 @Slf4j
 public class OneThreadMigrator {
 

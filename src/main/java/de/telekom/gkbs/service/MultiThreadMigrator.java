@@ -1,22 +1,17 @@
 package de.telekom.gkbs.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.*;
+import java.util.concurrent.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.*;
+import org.springframework.stereotype.Component;
 
 import de.telekom.gkbs.model.ShoppingCart;
 import de.telekom.gkbs.persistence.ShoppingCartPageableRepository;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Component
 @Slf4j
 public class MultiThreadMigrator {
     

@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MultiThreadMigrator {
     
-    private final ExecutorService threadPool = Executors.newFixedThreadPool(25);
+    private final Executor threadPool = Executors.newFixedThreadPool(25);
     
     @Autowired private ShoppingCartPageableRepository dataRepo;
     private static final int PAGE_SIZE = 10; 
